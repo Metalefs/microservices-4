@@ -13,20 +13,24 @@
     "query": "pushd .\\query && npm start && popd",
     
     "start-deploy-all": "concurrently \"npm:deploy-*\"",
-    "deploy-comments": "pushd .\\query && docker build -t geide/comments . && docker push geide/comments && popd",
-    "deploy-event-bus": "pushd .\\query && docker build -t geide/event-bus . && docker push geide/event-bus && popd",
-    "deploy-moderation": "pushd .\\query && docker build -t geide/moderation . && docker push geide/moderation && popd",
+    "deploy-client": "pushd .\\client && docker build -t geide/client . && docker push geide/client && popd",
+    "deploy-comments": "pushd .\\comments && docker build -t geide/comments . && docker push geide/comments && popd",
+    "deploy-event-bus": "pushd .\\event-bus && docker build -t geide/event-bus . && docker push geide/event-bus && popd",
+    "deploy-moderation": "pushd .\\moderation && docker build -t geide/moderation . && docker push geide/moderation && popd",
     "deploy-posts": "pushd .\\posts && docker build -t geide/posts . && docker push geide/posts && popd",
     "deploy-query": "pushd .\\query && docker build -t geide/query . && docker push geide/query && popd",
     
     "apply-all-kubectl": "pushd .\\infra\\k8s && kubectl apply -f . && popd",
+    "apply-ingress": "pushd .\\infra\\k8s && kubectl apply -f ingress.srv.yaml && popd",
+    "apply-client": "pushd .\\infra\\k8s && kubectl apply -f client.depl.yaml && popd",
 
     "start-redeploy-all": "concurrently \"npm:restart-*\"",
-    "restart-comments-kubectl": "pushd .\\infra\\k8s && kubectl rollout restart deployment comments-depl -n && popd",
-    "restart-event-bus-kubectl": "pushd .\\infra\\k8s && kubectl rollout restart deployment event-bus-depl && popd",
-    "restart-moderation-kubectl": "pushd .\\infra\\k8s && kubectl rollout restart deployment moderation-depl && popd",
-    "restart-posts-kubectl": "pushd .\\infra\\k8s && kubectl rollout restart deployment posts-depl && popd",
-    "restart-query-kubectl": "pushd .\\infra\\k8s && kubectl rollout restart deployment query-depl && popd"
+    "restart-client": "pushd .\\infra\\k8s && kubectl rollout restart deployment client-depl && popd",
+    "restart-comments": "pushd .\\infra\\k8s && kubectl rollout restart deployment comments-depl && popd",
+    "restart-event-bus": "pushd .\\infra\\k8s && kubectl rollout restart deployment event-bus-depl && popd",
+    "restart-moderation": "pushd .\\infra\\k8s && kubectl rollout restart deployment moderation-depl && popd",
+    "restart-posts": "pushd .\\infra\\k8s && kubectl rollout restart deployment posts-depl && popd",
+    "restart-query": "pushd .\\infra\\k8s && kubectl rollout restart deployment query-depl && popd"
   },
   "author": "",
   "license": "ISC"
